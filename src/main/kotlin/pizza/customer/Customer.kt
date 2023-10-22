@@ -1,47 +1,26 @@
 package pizza.customer
 
-class Customer {
-    //
-    // --- fields ---
-    //
+class Customer(
+    idParam: Long? = null,
+    var fullName: String? = null,
+    var address: Address? = null,
+    var phoneNumber: String? = null,
+    var orderCount: Int = 0,
+) {
 
-    var id: Long? = null
-        private set
+    var id: Long? = idParam
+        set(value) {
+            check(this.id == null) { "Cannot change existing id" }
+            field = value
+        }
 
-    var fullName: String? = null
-
-    var address: Address? = null
-
-    var phoneNumber: String? = null
-
-    var orderCount = 0
-        private set
-
-    //
-    // --- constructors ---
-    //
-
-    constructor(fullName: String?, address: Address?, phoneNumber: String?) {
-        this.fullName = fullName
-        this.address = address
-        this.phoneNumber = phoneNumber
-    }
-
-    constructor(id: Long?, fullName: String?, address: Address?, phoneNumber: String?) {
-        this.id = id
-        this.fullName = fullName
-        this.address = address
-        this.phoneNumber = phoneNumber
-    }
-
-    fun setId(id: Long) {
-        check(this.id == null) { "Cannot change existing id" }
-        this.id = id
-    }
+    constructor(fullName: String?, address: Address?, phoneNumber: String?) :
+            this(null, fullName, address, phoneNumber)
 
     //
     // --- other methods ---
     //
+
     fun increaseOrderCount(): Int {
         return orderCount++
     }
