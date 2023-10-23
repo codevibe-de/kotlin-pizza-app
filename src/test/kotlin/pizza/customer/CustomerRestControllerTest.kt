@@ -2,8 +2,9 @@ package pizza.customer
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.jayway.jsonpath.JsonPath
+import org.assertj.core.api.Assertions
+import org.assertj.core.api.Assertions.assertThat
 import org.hamcrest.Matchers
-import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.skyscreamer.jsonassert.JSONAssert
 import org.springframework.beans.factory.annotation.Autowired
@@ -79,11 +80,13 @@ internal class CustomerRestControllerTest {
     @Test
     fun createCustomer() {
         // when
+        val customerName = "Test Customer"
+        val json = """{"fullName":"$customerName"}"""
         val resultActions = mockMvc
             .perform(
                 post(CustomerRestController.CREATE_ENDPOINT)
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content("{\"fullName\":\"Test Case\"}")
+                    .content(json)
             )
 
         // then - assert response
@@ -95,9 +98,10 @@ internal class CustomerRestControllerTest {
         // then - assert persistence
         val responseJson = resultActions.andReturn().response.contentAsString
         val customerId = JsonPath.read<Int>(responseJson, "$.id")
-        val customer: Customer? = customerRepository.findById(customerId.toLong())
-        Assertions.assertNotNull(customer)
-        Assertions.assertEquals("Test Case", customer!!.fullName)
+        val optionalCustomer = customerRepository.findById(customerId.toLong())
+        assertThat(optionalCustomer).isNotEmpty
+        val customer = optionalCustomer.get()
+        assertThat(customer.fullName).isEqualTo(customerName)
     }
 
 

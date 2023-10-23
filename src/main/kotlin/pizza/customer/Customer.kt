@@ -1,7 +1,15 @@
 package pizza.customer
 
+import jakarta.persistence.Embedded
+import jakarta.persistence.Entity
+import jakarta.persistence.GeneratedValue
+import jakarta.persistence.Id
+
+@Entity
 class Customer {
 
+    @Id
+    @GeneratedValue
     var id: Long? = null
         set(value) {
             check(this.id == null) { "Cannot change existing id" }
@@ -10,6 +18,7 @@ class Customer {
 
     var fullName: String
 
+    @Embedded
     var address: Address?
 
     var phoneNumber: String?

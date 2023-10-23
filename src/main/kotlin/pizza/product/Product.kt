@@ -1,23 +1,14 @@
 package pizza.product
 
-class Product {
+import jakarta.persistence.Entity
+import jakarta.persistence.Id
 
-    var productId: String? = null
-        private set
-
-    var name: String? = null
-        private set
-
-    var price: Double? = null
-        private set
-
-    constructor()
-
-    constructor(productId: String?, name: String?, price: Double?) {
-        this.productId = productId
-        this.name = name
-        this.price = price
-    }
+@Entity
+class Product(
+    @Id var productId: String? = null,
+    var name: String? = null,
+    var price: Double? = null,
+) {
 
     //
     // --- other methods ---

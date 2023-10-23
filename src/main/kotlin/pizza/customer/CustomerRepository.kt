@@ -1,9 +1,10 @@
 package pizza.customer
 
-interface CustomerRepository {
+import org.springframework.data.jpa.repository.JpaRepository
+import java.util.Optional
 
-    fun save(customer: Customer): Customer
+interface CustomerRepository : JpaRepository<Customer, Long> {
 
-    fun findById(id: Long): Customer?
+    fun findByPhoneNumber(phoneNumber: String): Optional<Customer>
 
 }

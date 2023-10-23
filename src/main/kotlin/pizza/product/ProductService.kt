@@ -1,18 +1,23 @@
 package pizza.product
 
 import org.springframework.stereotype.Service
+import java.util.UUID
 
 @Service
-class ProductService {
+class ProductService(
+    private val productRepository: ProductRepository
+) {
 
-    fun getProduct(productId: String) : Product {
-        // todo
-        return Product()
-    }
+    fun getProduct(productId: String) : Product =
+        productRepository.findById(productId)
+            .orElseThrow { ProductNotFoundException("for id $productId") }
 
 
     fun createProduct(product: Product) {
-        // todo
+        if (product.productId.isNullOrBlank()) {
+            product.productId = UUID.randomUUID().toString()
+        }
+        productRepository.save(product)
     }
 
 }

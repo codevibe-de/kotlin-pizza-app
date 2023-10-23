@@ -41,7 +41,7 @@ interface SampleDataLoader : Runnable {
             return Address(street, postalCode, city)
         }
 
-        protected fun createCustomer(fullName: String?, phoneNumber: String?, address: Address?) {
+        protected fun createCustomer(fullName: String, phoneNumber: String?, address: Address?) {
             customerService.createCustomer(
                 Customer(
                     fullName,
