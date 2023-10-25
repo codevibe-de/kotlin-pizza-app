@@ -11,7 +11,8 @@ import org.springframework.context.annotation.Import
 import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 import pizza.customer.Customer
 import pizza.customer.CustomerRepository
 import pizza.customer.CustomerService
@@ -63,14 +64,9 @@ internal class OrderRestControllerTest {
 
         // then
         resultActions
-            .andExpect(MockMvcResultMatchers.status().isCreated())
-            .andExpect(MockMvcResultMatchers.jsonPath("$.totalPrice", Matchers.`is`(2.0)))
-            .andExpect(
-                MockMvcResultMatchers.jsonPath(
-                    "$.customer.fullName",
-                    Matchers.`is`("Toni Test")
-                )
-            )
+            .andExpect(status().isCreated())
+            .andExpect(jsonPath("$.totalPrice", Matchers.`is`(2.0)))
+            .andExpect(jsonPath("$.customer.fullName", Matchers.`is`("Toni Test")))
     }
 
     private fun toJson(`object`: Any): String {

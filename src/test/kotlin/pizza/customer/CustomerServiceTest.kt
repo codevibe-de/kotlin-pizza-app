@@ -17,7 +17,7 @@ class CustomerServiceTest {
     @Test
     fun getCustomer() {
         // when
-        val customer: Customer? = customerService.getCustomerByPhoneNumber("+49 123 456789")
+        val customer: Customer = customerService.getCustomerByPhoneNumber("+49 123 456789")
 
         // then
         assertNotNull(customer) // using this provides smart-cast (assertj does not)
