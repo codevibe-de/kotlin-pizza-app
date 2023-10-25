@@ -5,6 +5,10 @@ import org.springframework.stereotype.Service
 @Service
 class ProductService {
 
+    /**
+     * Returns the [Product] found or throws [ProductNotFoundException] if not
+     * @throws ProductNotFoundException
+     */
     fun getProduct(productId: String): Product {
         // todo
         return Product()

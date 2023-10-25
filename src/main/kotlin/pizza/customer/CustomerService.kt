@@ -1,6 +1,8 @@
 package pizza.customer
 
 import org.springframework.stereotype.Service
+import pizza.product.Product
+import pizza.product.ProductNotFoundException
 
 @Service
 class CustomerService {
@@ -9,9 +11,12 @@ class CustomerService {
         // todo
     }
 
-    fun getCustomerByPhoneNumber(phoneNumber: String): Customer? {
-        // todo
-        return null
+    /**
+     * Returns a [Customer] with a matching phone-number or throws [CustomerNotFoundException]
+     * @throws CustomerNotFoundException
+     */
+    fun getCustomerByPhoneNumber(phoneNumber: String): Customer {
+        TODO()
     }
 
 }
