@@ -1,14 +1,17 @@
 package pizza.order
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.ninjasquad.springmockk.MockkBean
+import io.mockk.every
+import io.mockk.slot
 import org.hamcrest.Matchers
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.autoconfigure.orm.jpa.AutoConfigureDataJpa
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.context.annotation.Import
 import org.springframework.http.MediaType
+import org.springframework.test.context.TestPropertySource
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath
@@ -24,27 +27,32 @@ import java.util.*
 
 @WebMvcTest(OrderRestController::class)
 @Import(OrderService::class, CustomerService::class, ProductService::class)
-@AutoConfigureDataJpa
+@TestPropertySource(properties = ["app.skip-loading-sample-data=true"])
 internal class OrderRestControllerTest {
 
     @Autowired
     private lateinit var mockMvc: MockMvc
 
-    @Autowired
+    @MockkBean
     private lateinit var productRepository: ProductRepository
 
-    @Autowired
+    @MockkBean
     private lateinit var customerRepository: CustomerRepository
+
+    @MockkBean(relaxed = true)
+    private lateinit var orderRepository: OrderRepository
 
     @Autowired
     private lateinit var objectMapper: ObjectMapper
 
     @BeforeEach
     fun setupTestData() {
-        productRepository.deleteAll()
-        productRepository.save(Product("p1", "Product One", 1.00))
-        customerRepository.deleteAll()
-        customerRepository.save(Customer("Toni Test", null, "040-112233"))
+        every { productRepository.findById("p1") } returns
+                Optional.of(Product("p1", "Product One", 1.00))
+        every { customerRepository.findByPhoneNumber("040-112233") } returns
+                Optional.of(Customer("Toni Test", null, "040-112233"))
+        val orderSlot = slot<Order>()
+        every { orderRepository.save(capture(orderSlot)) } answers { orderSlot.captured }
     }
 
     @Test

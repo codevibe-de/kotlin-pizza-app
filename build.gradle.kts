@@ -25,9 +25,13 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     runtimeOnly("com.h2database:h2")
 
-	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	testImplementation("org.springframework.boot:spring-boot-starter-test") {
+		// we don't want mockito coming from spring-starter-test since we use mockk
+		exclude(group="org.mockito")
+	}
 	testImplementation("org.jetbrains.kotlin:kotlin-test:1.8.22")
 	testImplementation("io.mockk:mockk:1.13.5")
+	testImplementation("com.ninja-squad:springmockk:4.0.2")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
@@ -40,9 +44,4 @@ tasks.withType<KotlinCompile> {
 
 tasks.withType<Test> {
 	useJUnitPlatform()
-}
-
-configurations.all {
-	// we don't want mockito coming from spring-starter-test since we use mockk
-	exclude(group="org.mockito")
 }

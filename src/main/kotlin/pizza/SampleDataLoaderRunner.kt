@@ -3,6 +3,7 @@ package pizza
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.boot.ApplicationArguments
 import org.springframework.boot.ApplicationRunner
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty
 import org.springframework.core.annotation.Order
 import org.springframework.stereotype.Component
 
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Component
  */
 @Component
 @Order(0)
+@ConditionalOnProperty("app.skip-loading-sample-data", havingValue = "false", matchIfMissing = true)
 class SampleDataLoaderRunner(
     @param:Qualifier("small") private val sampleDataLoader: SampleDataLoader
 ) : ApplicationRunner {
