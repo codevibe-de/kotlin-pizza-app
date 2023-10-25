@@ -17,6 +17,8 @@ JPA will automatically create a schema
 - make sure all required beans exist
 - annotate JPA entities
 - fill in business logic
+- redesign the repository interfaces
+- create REST endpoints
 
 ## Links
 
