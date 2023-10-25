@@ -7,4 +7,6 @@ interface CustomerRepository : JpaRepository<Customer, Long> {
 
     fun findByPhoneNumber(phoneNumber: String): Optional<Customer>
 
+    fun deleteAll()
+
 }
