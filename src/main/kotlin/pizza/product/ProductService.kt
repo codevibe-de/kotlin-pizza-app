@@ -8,6 +8,10 @@ class ProductService(
     private val productRepository: ProductRepository
 ) {
 
+    /**
+     * Returns the [Product] found or throws [ProductNotFoundException] if not
+     * @throws ProductNotFoundException
+     */
     fun getProduct(productId: String) : Product =
         productRepository.findById(productId)
             .orElseThrow { ProductNotFoundException("for id $productId") }

@@ -16,6 +16,10 @@ class CustomerService(
             .orElseThrow { CustomerNotFoundException("for id $id") }
 
 
+    /**
+     * Returns a [Customer] with a matching phone-number or throws [CustomerNotFoundException]
+     * @throws CustomerNotFoundException
+     */
     fun getCustomerByPhoneNumber(phoneNumber: String): Customer =
         customerRepository.findByPhoneNumber(phoneNumber)
             .orElseThrow { CustomerNotFoundException("for phone-number $phoneNumber") }
