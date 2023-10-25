@@ -6,8 +6,8 @@ import jakarta.persistence.Id
 @Entity
 class Product(
     @Id var productId: String? = null,
-    var name: String? = null,
-    var price: Double? = null,
+    var name: String = "no-name",
+    var price: Double = 0.00,
 ) {
 
     //
