@@ -1,29 +1,36 @@
 package pizza.order
 
 import org.springframework.stereotype.Service
+import pizza.customer.CustomerService
+import pizza.product.ProductService
 
 @Service
-class OrderService {
+class OrderService(
+    private val orderRepository: OrderRepository,
+    private val customerService: CustomerService,
+    private val productService: ProductService,
+) {
 
     fun placeOrder(phoneNumber: String, itemQuantities: Map<String, Int>): Order {
         // load customer
-        // todo
+        val customer = customerService.getCustomerByPhoneNumber(phoneNumber)
 
         // ask product-service for total price
-        // todo
+        val totalPrice = productService.getTotalPrice(itemQuantities)
 
         // create order
-        // todo
+        val order = Order(
+            customer = customer,
+            totalPrice = totalPrice,
+            estimatedTimeOfDelivery = null
+        )
 
         // persist and return it
-        // todo
-        return Order()
+        return orderRepository.save(order)
     }
 
 
-    fun getOrders(): List<Order> {
-        // todo
-        return listOf()
-    }
+    fun getOrders(): List<Order> =
+        orderRepository.findAll()
 
 }
