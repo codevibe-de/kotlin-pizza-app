@@ -11,6 +11,7 @@ You can run the tests to get an idea of what is missing.
 
 - Since H2 is on the classpath Spring will start an internal in-memory database instance, for which
 JPA will automatically create a schema
+- Be aware of the SQL reserved word "order" when defining the `Order` JPA entity...
 
 ## Stuff to do
 
