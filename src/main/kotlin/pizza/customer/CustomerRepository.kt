@@ -6,4 +6,6 @@ interface CustomerRepository {
 
     fun findById(id: Long): Customer?
 
+    fun deleteAll()
+
 }

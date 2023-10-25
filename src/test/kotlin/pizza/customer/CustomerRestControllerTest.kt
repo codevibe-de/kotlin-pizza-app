@@ -31,7 +31,8 @@ internal class CustomerRestControllerTest {
     private lateinit var objectMapper: ObjectMapper
 
     private val customerFullName = "Bill Gates"
-    private val customerAddress: Address = Address("1415 L Street, Suite 200", "95814", "Sacramento, CA")
+    private val customerAddress: Address =
+        Address("1415 L Street, Suite 200", "95814", "Sacramento, CA")
     private val customerPhoneNumber = "+1 222 3333333"
 
     /**
