@@ -33,7 +33,7 @@ interface SampleDataLoader : Runnable {
             createCustomer("Enrico Pallazzo", "+49 123 456789", address1)
         }
 
-        protected fun createProduct(productId: String?, name: String?, price: Double) {
+        protected fun createProduct(productId: String?, name: String, price: Double) {
             productService.createProduct(Product(productId, name, price))
         }
 
@@ -41,7 +41,7 @@ interface SampleDataLoader : Runnable {
             return Address(street, postalCode, city)
         }
 
-        protected fun createCustomer(fullName: String?, phoneNumber: String?, address: Address?) {
+        protected fun createCustomer(fullName: String, phoneNumber: String?, address: Address?) {
             customerService.createCustomer(
                 Customer(
                     fullName,
