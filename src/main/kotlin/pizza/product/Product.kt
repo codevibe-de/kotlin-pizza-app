@@ -1,23 +1,10 @@
 package pizza.product
 
-class Product {
-
-    var productId: String = ""
-        private set
-
-    var name: String = ""
-        private set
-
-    var price: Double = 0.0
-        private set
-
-    constructor()
-
-    constructor(productId: String, name: String, price: Double) {
-        this.productId = productId
-        this.name = name
-        this.price = price
-    }
+class Product(
+    var productId: String? = null,
+    var name: String = "no-name",
+    var price: Double = 0.00,
+) {
 
     //
     // --- other methods ---
