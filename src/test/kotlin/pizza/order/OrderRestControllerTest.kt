@@ -35,9 +35,6 @@ internal class OrderRestControllerTest {
     @Autowired
     private lateinit var customerRepository: CustomerRepository
 
-    @Autowired
-    private lateinit var objectMapper: ObjectMapper
-
     @BeforeEach
     fun setupTestData() {
         productRepository.deleteAll()
@@ -49,16 +46,20 @@ internal class OrderRestControllerTest {
     @Test
     fun placeOrder() {
         // given
-        val orderRequestData = OrderRequest(
-            phoneNumber = "040-112233",
-            itemQuantities = Collections.singletonMap("p1", 2)
-        )
+        val orderRequestJson = """
+            {
+                "phoneNumber": ""040-112233",
+                "itemQuantities": {
+                    "p1": 2
+                }
+            }               
+        """.trimIndent()
 
         // when
         val resultActions = mockMvc.perform(
             MockMvcRequestBuilders.post(OrderRestController.PLACE_ORDER_ENDPOINT)
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(toJson(orderRequestData))
+                .content(orderRequestJson)
         )
 
         // then
@@ -71,9 +72,5 @@ internal class OrderRestControllerTest {
                     Matchers.`is`("Toni Test")
                 )
             )
-    }
-
-    private fun toJson(`object`: Any): String {
-        return objectMapper.writeValueAsString(`object`)
     }
 }
