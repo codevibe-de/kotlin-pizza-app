@@ -11,11 +11,10 @@ class OrderRestController(
     @PostMapping(PLACE_ORDER_ENDPOINT)
     @ResponseStatus(HttpStatus.CREATED)
     fun placeOrder(@RequestBody orderRequest: OrderRequest): Order {
-        TODO()
-//        return orderService.placeOrder(
-//            orderRequest.phoneNumber,
-//            orderRequest.itemQuantities
-//        )
+        return orderService.placeOrder(
+            orderRequest.phoneNumber,
+            orderRequest.itemQuantities
+        )
     }
 
 

@@ -1,3 +1,6 @@
 package pizza.order
 
-class OrderRequest
+data class OrderRequest(
+    val phoneNumber: String,
+    val itemQuantities: Map<String, Int>
+)
