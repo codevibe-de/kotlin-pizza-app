@@ -57,7 +57,7 @@ internal class OrderRestControllerTest {
         // given
         val orderRequestJson = """
             {
-                "phoneNumber": ""040-112233",
+                "phoneNumber": "040-112233",
                 "itemQuantities": {
                     "p1": 2
                 }
