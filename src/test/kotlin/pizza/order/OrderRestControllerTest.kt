@@ -39,7 +39,7 @@ internal class OrderRestControllerTest {
     @MockkBean
     private lateinit var customerRepository: CustomerRepository
 
-    @MockkBean(relaxed = true)
+    @MockkBean
     private lateinit var orderRepository: OrderRepository
 
     @Autowired
