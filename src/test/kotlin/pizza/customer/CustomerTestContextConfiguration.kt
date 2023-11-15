@@ -23,6 +23,6 @@ class CustomerTestContextConfiguration {
     // This can be, of course, replaced by just a @MockBean declaration in the test class itself.
     @Bean("productJdbcDao")
     fun mockedProductRepository(): ProductRepository {
-        return mockk<ProductRepository>()
+        return mockk<ProductRepository>(relaxed = true)
     }
 }
