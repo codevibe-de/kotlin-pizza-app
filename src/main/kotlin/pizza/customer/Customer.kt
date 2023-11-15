@@ -1,5 +1,10 @@
 package pizza.customer
 
+// you need the following JPA annotations here:
+// - @Entity
+// - @Id
+// - @GeneratedValue
+// - @Embedded
 class Customer {
 
     var id: Long? = null

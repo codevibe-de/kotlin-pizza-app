@@ -3,6 +3,12 @@ package pizza.order
 import pizza.customer.Customer
 import java.time.LocalDateTime
 
+// you need the following JPA annotations here:
+// - @Entity
+// - @Table
+// - @Id
+// - @GeneratedValue
+// - @ManyToOne
 class Order {
 
     var id: Long? = null
