@@ -5,6 +5,8 @@ This project is a port of the Java Spring-Boot Pizza API project used in our Spr
 The `main` branch is a **non-working set of basic classes** that need major work to become a well
 working application.
 
+## Tests
+
 You can run the tests to get an idea of what is missing.
 
 ## Notes
@@ -20,6 +22,7 @@ JPA will automatically create a schema
 - fill in business logic
 - redesign the repository interfaces
 - create REST endpoints
+- complete given classes (e.g. `OrderRequest`), making sure you use Kotlin features 
 
 ## Links
 
